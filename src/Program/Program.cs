@@ -22,8 +22,9 @@ namespace Full_GRASP_And_SOLID
 
             Recipe recipe = new Recipe();
             recipe.FinalProduct = GetProduct("Café con leche");
-            recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
-            recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
+            recipe.CreateStep(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120);
+            recipe.CreateStep(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60);
+
 
             IPrinter printer;
             printer = new ConsolePrinter();
@@ -40,6 +41,23 @@ namespace Full_GRASP_And_SOLID
 
             AddEquipmentToCatalog("Cafetera", 1000);
             AddEquipmentToCatalog("Hervidor", 2000);
+        }
+
+        // Instancias de Printer usando Creator
+        public static IPrinter CreatePrinter(string type)
+        {
+            if (type == "Console")
+            {
+                return new ConsolePrinter();
+            }
+            else if (type == "File")
+            {
+                return new FilePrinter();
+            }
+            else
+            {
+                throw new ArgumentException("Invalid printer type");
+            }
         }
 
         private static void AddProductToCatalog(string description, double unitCost)

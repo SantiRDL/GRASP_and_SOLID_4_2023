@@ -52,5 +52,13 @@ namespace Full_GRASP_And_SOLID
 
             return result;
         }
+
+        // Metodo Creator para crear instancias de Step
+        public Step CreateStep(Product input, double quantity, Equipment equipment, int time)
+        {
+            Step step = new Step(input, quantity, equipment, time);
+            AddStep(step);
+            return step;
+        }
     }
 }
